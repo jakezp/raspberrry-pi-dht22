@@ -9,8 +9,8 @@ do
                 humidity=`echo $climate | jq -r '.humidity.value'`
 		echo "T: $temp"
 		echo "H: $humidity"
-		mosquitto_pub -h $MQTT_HOST -t $MQTT_TOPIC_PREFIX/temperature -m $temp
-		mosquitto_pub -h $MQTT_HOST -t $MQTT_TOPIC_PREFIX/humidity -m $humidity
+		mosquitto_pub -h $MQTT_HOST -p 1883 -u $MQTT_USER -P $MQTT_PASS -t monitor/$MQTT_TOPIC_PREFIX/env/temperature -m $temp
+		mosquitto_pub -h $MQTT_HOST -p 1883 -u $MQTT_USER -P $MQTT_PASS -t monitor/$MQTT_TOPIC_PREFIX/env/humidity -m $humidity
         else
 		$?
 	fi
